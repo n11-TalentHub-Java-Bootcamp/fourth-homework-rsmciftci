@@ -55,4 +55,27 @@ public class LoanService {
         List<LoanDto> loanDtoList = mapper.convertLoanListToLoanDtoList(loanList);
         return loanDtoList;
     }
+
+    public List<LoanDto> findPrincipleLoansOfUser(Long id){
+        BigDecimal unpaidLoanAmountGreaterThan = BigDecimal.ZERO;
+        LoanMapper mapper = LoanMapper.INSTANCE;
+
+        List<Loan> principleLoanListOfUser = loanEntityService.findLoansByCustomerIdAndUnpaidLoanAmountGreaterThan(id,unpaidLoanAmountGreaterThan);
+        List<LoanDto> principleLoanDtoListOfUser = mapper.convertLoanListToLoanDtoList(principleLoanListOfUser);
+        return principleLoanDtoListOfUser;
+    }
+
+    public List<LoanDto> findOverduePrincipleLoansOfUser(Long id){
+        BigDecimal unpaidLoanAmountGreaterThan = BigDecimal.ZERO;
+        LocalDate localDateNow = LocalDate.now();
+        LoanMapper mapper = LoanMapper.INSTANCE;
+
+        List<Loan> overduePrincipleLoanListOfUser = loanEntityService.findLoansByCustomerIdAndUnpaidLoanAmountGreaterThanAndPaymentDueDateBefore(id,unpaidLoanAmountGreaterThan,localDateNow);
+        List<LoanDto> overduePrincipleLoanDtoListOfUser = mapper.convertLoanListToLoanDtoList(overduePrincipleLoanListOfUser);
+        return overduePrincipleLoanDtoListOfUser;
+    }
+
+
+
+
 }
