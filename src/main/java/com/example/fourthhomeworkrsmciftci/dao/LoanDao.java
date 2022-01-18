@@ -13,9 +13,11 @@ import java.util.List;
 @Repository
 public interface LoanDao extends JpaRepository<Loan,Long> {
 
-    List<Loan> findLoanByLoanCreationDateBetweenAndLoanTypeIs(LocalDate earlierDate, LocalDate laterDate, LoanType loanType);
 
-    List<Loan> findLoansByCustomerIdAndUnpaidLoanAmountGreaterThan(Long id, BigDecimal unpaidLoanAmountGreaterThan);
+    List<Loan> findLoansByLoanCreationDateBetween(LocalDate earlierDate,LocalDate laterDate);
 
-    List<Loan> findLoansByCustomerIdAndUnpaidLoanAmountGreaterThanAndPaymentDueDateBefore(Long id, BigDecimal unpaidLoanAmountGreaterThan, LocalDate localDateNow);
+    List<Loan> findLoansByCustomerIdAndUnpaidLoanAmountGreaterThanAndLoanTypeIs(Long id, BigDecimal unpaidLoanAmountGreaterThan, LoanType loanType);
+    List<Loan> findLoansByCustomerIdAndUnpaidLoanAmountGreaterThanAndLoanTypeIsAndPaymentDueDateBefore(Long id, BigDecimal unpaidLoanAmountGreaterThan, LoanType loanType, LocalDate now);
+
+    List<Loan> findLoansByCustomerIdAndUnpaidLoanAmountGreaterThanAndPaymentDueDateBeforeAndLoanTypeIs(Long id, BigDecimal unpaidLoanAmountGreaterThan, LocalDate localDateNow,LoanType loanType);
 }

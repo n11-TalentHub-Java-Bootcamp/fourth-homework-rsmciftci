@@ -2,6 +2,7 @@ package com.example.fourthhomeworkrsmciftci.converter;
 
 import com.example.fourthhomeworkrsmciftci.dto.LoanDto;
 import com.example.fourthhomeworkrsmciftci.dto.LoanSavingDto;
+import com.example.fourthhomeworkrsmciftci.dto.LoanSumOfLoansOfUser;
 import com.example.fourthhomeworkrsmciftci.entity.Loan;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,5 +24,6 @@ public interface LoanMapper {
     LoanDto convertLoanToLoanDto(Loan loan);
 
     List<LoanDto> convertLoanListToLoanDtoList(List<Loan> loanList);
+
 
 }
