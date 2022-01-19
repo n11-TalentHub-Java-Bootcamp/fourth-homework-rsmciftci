@@ -9,10 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LoanDao extends JpaRepository<Loan,Long> {
 
+    Optional<Loan> findLoanByIdAndCustomerId(Long loanId, Long customerId);
 
     List<Loan> findLoansByLoanCreationDateBetween(LocalDate earlierDate,LocalDate laterDate);
 

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 
@@ -20,8 +22,11 @@ public class Payment implements BaseEntity {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
-    private Set<Loan> loan;
+    private LocalDate paymentDate;
+
+    @OneToOne
+    @JoinColumn(name="loan_id")
+    private Loan loan;
 
     @ManyToOne
     @JoinColumn(name = "customer_id"/*, foreignKey = @ForeignKey(name ="FK_PAYMENT_CUSTOMER_ID")*/)

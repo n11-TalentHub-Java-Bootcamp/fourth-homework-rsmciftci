@@ -34,7 +34,7 @@ public class Loan implements BaseEntity {
 
     // 2 loan; principalDebt & latePaymentInterest
     // paid by the one payment
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name ="payment_id")
     private Payment payment;
 
