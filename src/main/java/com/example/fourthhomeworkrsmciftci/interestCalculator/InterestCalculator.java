@@ -2,6 +2,7 @@ package com.example.fourthhomeworkrsmciftci.interestCalculator;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -9,13 +10,13 @@ public class InterestCalculator {
 
     public InterestCalculator() {
     }
-    // TODO:Can it be convertable to adaptor design pattern.
+
     public static BigDecimal calculateInterest(LocalDate dueDate, LocalDate now, BigDecimal principleLoan){
 
         BigDecimal interest = BigDecimal.ZERO;
         BigDecimal interestRateBefore = BigDecimal.valueOf(1.5);
         BigDecimal interestRateAfter = BigDecimal.valueOf(2);
-        LocalDate dateChangesInterestRate = LocalDate.of(2018,01,01);
+        LocalDate dateChangesInterestRate = LocalDate.of(2018,1,1);
 
 
         if(dueDate.isBefore(now)){
@@ -48,6 +49,7 @@ public class InterestCalculator {
 
         }
 
-        return interest.setScale(2,BigDecimal.ROUND_HALF_EVEN);
+        return interest.setScale(2, RoundingMode.HALF_EVEN);
+
     }
 }

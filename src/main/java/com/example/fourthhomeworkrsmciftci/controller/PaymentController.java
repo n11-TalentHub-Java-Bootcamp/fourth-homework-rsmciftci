@@ -1,6 +1,7 @@
 package com.example.fourthhomeworkrsmciftci.controller;
 
 import com.example.fourthhomeworkrsmciftci.dto.PaymentDto;
+import com.example.fourthhomeworkrsmciftci.dto.PaymentTotalPaidInterestDto;
 import com.example.fourthhomeworkrsmciftci.dto.PaymentTransactionDto;
 import com.example.fourthhomeworkrsmciftci.service.PaymentService;
 import com.example.fourthhomeworkrsmciftci.service.transactionService.PaymentTransactionService;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,9 +35,17 @@ public class PaymentController {
     }
 
     // (4c)
-    @GetMapping("all-by-user-{id}")
+    @GetMapping("all-by-user/{id}")
     public List<PaymentDto> findAllPaymentsOfUser(@PathVariable("id") Long id){
         List<PaymentDto> paymentDtoList = paymentService.findAllPaymentsOfUser(id);
         return paymentDtoList;
     }
+
+    // (4d)
+    @GetMapping("sum-of-late-payment-interest-paid-by-user/{id}")
+    public BigDecimal findSumOfInterestPaidByUser(@PathVariable("id") Long id){
+        BigDecimal totalPaidInterestDto = paymentService.findSumOfInterestPaidByUser(id);
+        return totalPaidInterestDto;
+    }
+
 }

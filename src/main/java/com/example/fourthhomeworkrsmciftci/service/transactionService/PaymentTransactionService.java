@@ -51,8 +51,7 @@ public class PaymentTransactionService {
         }
 
 
-        // TODO: shall we move check process top of the method?
-        // TODO:MathContextleri kaldırsak hata alır mıyız? Veya kaldırmalımıyız_
+
         BigDecimal interest = InterestCalculator.calculateInterest(loan.getPaymentDueDate(), localDateNow,loan.getLoanAmount());
         BigDecimal moneyBeingPaid = paymentTransactionDto.getMoneyBeingPaid();
 
@@ -71,7 +70,7 @@ public class PaymentTransactionService {
             interestDebt.setLoanType(LoanType.LATE_PAYMENT_INTEREST);
             interestDebt.setUnpaidLoanAmount(BigDecimal.ZERO);
             interestDebt.setPayment(payment);
-            interestDebt.setLoan(loan); // TODO: check if it saves id to db
+            interestDebt.setLoan(loan);
 
             loanDao.save(interestDebt);
         }

@@ -3,11 +3,13 @@ package com.example.fourthhomeworkrsmciftci.service;
 import com.example.fourthhomeworkrsmciftci.converter.PaymentMapper;
 import com.example.fourthhomeworkrsmciftci.dao.PaymentDao;
 import com.example.fourthhomeworkrsmciftci.dto.PaymentDto;
+import com.example.fourthhomeworkrsmciftci.dto.PaymentTotalPaidInterestDto;
 import com.example.fourthhomeworkrsmciftci.dto.PaymentTransactionDto;
 import com.example.fourthhomeworkrsmciftci.entity.Payment;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,5 +44,10 @@ public class PaymentService {
         List<PaymentDto> paymentDtoList = paymentMapper.convertPaymentListToPaymentDtoList(paymentList);
         return  paymentDtoList;
 
+    }
+
+
+    public BigDecimal findSumOfInterestPaidByUser(Long id){
+        return paymentDao.calculateSumOfInterestOfUser(id);
     }
 }

@@ -22,10 +22,5 @@ public interface PaymentMapper {
     PaymentDto convertPaymentToPaymentDto(Payment payment);
     List<PaymentDto> convertPaymentListToPaymentDtoList(List<Payment> paymentList);
 
-    //TODO:delete if not needed
-    /*
-    @Mapping(source="principalDebtId",target = "loan.id")
-    @Mapping(source="customerId",target = "customer.id")
-    Payment convertPaymentTransactionDtoToPaymentEntity(PaymentTransactionDto paymentTransactionDto);
-*/
+
 }
