@@ -54,6 +54,8 @@ public class LoanService {
         List<Loan> loanList = loanEntityService.findLoanByLoanCreationDateBetweenAndLoanTypeIs(earlierDate,laterDate,loanType);
         LoanMapper mapper = LoanMapper.INSTANCE;
         List<LoanDto> loanDtoList = mapper.convertLoanListToLoanDtoList(loanList);
+        loanDtoList = LoanConverter.addInterestToList(loanDtoList);
+
         return loanDtoList;
     }
 
@@ -63,6 +65,7 @@ public class LoanService {
 
         List<Loan> principleLoanListOfUser = loanEntityService.findLoansByCustomerIdAndUnpaidLoanAmountGreaterThanAndLoanTypeIs(id,unpaidLoanAmountGreaterThan,loanType);
         List<LoanDto> principleLoanDtoListOfUser = mapper.convertLoanListToLoanDtoList(principleLoanListOfUser);
+        principleLoanDtoListOfUser = LoanConverter.addInterestToList(principleLoanDtoListOfUser);
         return principleLoanDtoListOfUser;
     }
 
@@ -73,6 +76,8 @@ public class LoanService {
 
         List<Loan> overduePrincipleLoanListOfUser = loanEntityService.findLoansByCustomerIdAndUnpaidLoanAmountGreaterThanAndPaymentDueDateBeforeAndLoanTypeIs(id,unpaidLoanAmountGreaterThan,localDateNow,loanType);
         List<LoanDto> overduePrincipleLoanDtoListOfUser = mapper.convertLoanListToLoanDtoList(overduePrincipleLoanListOfUser);
+        overduePrincipleLoanDtoListOfUser = LoanConverter.addInterestToList(overduePrincipleLoanDtoListOfUser);
+
         return overduePrincipleLoanDtoListOfUser;
     }
 
@@ -82,9 +87,7 @@ public class LoanService {
 
         List<Loan> loanListOfUser = loanEntityService.calculateSumOfUnpaidLoansOfUser(id,loanAmountGreaterThan,loanType);
 
-        LoanConverter loanConverter = new LoanConverter();
-
-       LoanSumOfLoansOfUser sumOfLoansOfUser = loanConverter.converLoanListOfUserToLoanLoanSumOfLoansOfUserDto(loanListOfUser);
+       LoanSumOfLoansOfUser sumOfLoansOfUser = LoanConverter.converLoanListOfUserToLoanLoanSumOfLoansOfUserDto(loanListOfUser);
 
 
         return sumOfLoansOfUser;
@@ -97,9 +100,9 @@ public class LoanService {
 
         List<Loan> overdueLoanListOfUser = loanEntityService.calculateSumOfOverdueUnpaidLoansOfUser(id,loanAmountGreaterThan,loanType,now);
 
-        LoanConverter loanConverter = new LoanConverter();
+        //LoanConverter loanConverter = new LoanConverter();
 
-        LoanSumOfLoansOfUser sumOfLoansOfUser = loanConverter.converLoanListOfUserToLoanLoanSumOfLoansOfUserDto(overdueLoanListOfUser);
+        LoanSumOfLoansOfUser sumOfLoansOfUser = LoanConverter.converLoanListOfUserToLoanLoanSumOfLoansOfUserDto(overdueLoanListOfUser);
 
         return sumOfLoansOfUser;
     }
@@ -110,10 +113,7 @@ public class LoanService {
         LocalDate now = LocalDate.now();
 
         List<Loan> overdueLoanListOfUser = loanEntityService.calculateSumOfOverdueUnpaidLoansOfUser(id,loanAmountGreaterThan,loanType,now);
-
-        LoanConverter loanConverter = new LoanConverter();
-
-        LoanTotalInterestDto totalInterest = loanConverter.converLoanListOfUserToLoanTotalInterestDto(overdueLoanListOfUser);
+        LoanTotalInterestDto totalInterest = LoanConverter.converLoanListOfUserToLoanTotalInterestDto(overdueLoanListOfUser);
 
         return totalInterest;
     }

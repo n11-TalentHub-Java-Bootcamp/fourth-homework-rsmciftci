@@ -16,5 +16,6 @@ public class LoanDto {
     private LocalDate loanCreationDate;
     private BigDecimal unpaidLoanAmount;
     private BigDecimal loanAmount;
+    private BigDecimal interest;
     private LoanType loanType;
 }

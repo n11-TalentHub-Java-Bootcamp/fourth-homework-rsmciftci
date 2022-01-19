@@ -1,6 +1,7 @@
 package com.example.fourthhomeworkrsmciftci.interestCalculator;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -9,7 +10,7 @@ public class InterestCalculator {
     public InterestCalculator() {
     }
 
-    public BigDecimal calculateInterest(LocalDate dueDate, LocalDate now, BigDecimal principleLoan){
+    public static BigDecimal calculateInterest(LocalDate dueDate, LocalDate now, BigDecimal principleLoan){
 
         BigDecimal interest = BigDecimal.ZERO;
         BigDecimal interestRateBefore = BigDecimal.valueOf(1.5);
@@ -25,17 +26,20 @@ public class InterestCalculator {
                 BigDecimal numberOfDaysAfterDateChangesInterestRate = BigDecimal.valueOf(ChronoUnit.DAYS.between(dateChangesInterestRate,now));
 
                 BigDecimal interestBeforeInterestRateChange = principleLoan.multiply(interestRateBefore)
-                        .multiply(numberOfDaysBeforeDateChangesInterestRate).divide(BigDecimal.valueOf(36000));
+                        .multiply(numberOfDaysBeforeDateChangesInterestRate).divide(BigDecimal.valueOf(36000), MathContext.DECIMAL32);
+
 
                 BigDecimal interestAfterInterestRateChange = principleLoan.multiply(interestRateAfter)
-                        .multiply(numberOfDaysAfterDateChangesInterestRate).divide(BigDecimal.valueOf(36000));
+                        .multiply(numberOfDaysAfterDateChangesInterestRate).divide(BigDecimal.valueOf(36000), MathContext.DECIMAL32);
 
                 interest = interestBeforeInterestRateChange.add(interestAfterInterestRateChange);
+
 
             }else{
                 BigDecimal numberOfDays = BigDecimal.valueOf(ChronoUnit.DAYS.between(dueDate,now));
 
-                interest = principleLoan.multiply(interestRateAfter).multiply(numberOfDays).divide(BigDecimal.valueOf(36000));
+                interest = principleLoan.multiply(interestRateAfter).multiply(numberOfDays).divide(BigDecimal.valueOf(36000), MathContext.DECIMAL32);
+
             }
 
             if(interest.compareTo(BigDecimal.ONE) < 0){
@@ -44,6 +48,6 @@ public class InterestCalculator {
 
         }
 
-        return interest;
+        return interest.setScale(2,BigDecimal.ROUND_HALF_EVEN);
     }
 }

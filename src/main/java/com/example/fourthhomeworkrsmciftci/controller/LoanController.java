@@ -1,5 +1,6 @@
 package com.example.fourthhomeworkrsmciftci.controller;
 
+import com.example.fourthhomeworkrsmciftci.converter.LoanConverter;
 import com.example.fourthhomeworkrsmciftci.dto.LoanDto;
 import com.example.fourthhomeworkrsmciftci.dto.LoanSavingDto;
 import com.example.fourthhomeworkrsmciftci.dto.LoanSumOfLoansOfUser;
@@ -68,7 +69,6 @@ public class LoanController {
     @GetMapping("sum-of-unpaid-loans-of-user/{id}")
     public ResponseEntity findSumOfUnpaidLoansOfUser(@PathVariable("id") Long id){
 
-
         LoanSumOfLoansOfUser sumOfUnpaidLoansOfUserDto = loanService.calculateSumOfUnpaidLoansOfUser(id);
         return ResponseEntity.ok(sumOfUnpaidLoansOfUserDto);
     }
@@ -76,11 +76,9 @@ public class LoanController {
     // (3h)
     @GetMapping("sum-of-overdue-unpaid-loans-of-user/{id}")
     public ResponseEntity calculateSumOfOverdueUnpaidLoansOfUser(@PathVariable("id") Long id){
-
         LoanSumOfLoansOfUser sumOfUnpaidLoansOfUserDto = loanService.calculateSumOfOverdueUnpaidLoansOfUser(id);
         return ResponseEntity.ok(sumOfUnpaidLoansOfUserDto);
     }
-
     // (3i)
     @GetMapping("total-interest-of-user/{id}")
     public ResponseEntity calculateTotalInterestOfUser(@PathVariable("id") Long id){
