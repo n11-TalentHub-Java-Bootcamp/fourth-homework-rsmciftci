@@ -81,33 +81,32 @@ public class LoanService {
         return overduePrincipleLoanDtoListOfUser;
     }
 
-    public LoanSumOfLoansOfUser calculateSumOfUnpaidLoansOfUser(Long id){
+    public List<Loan> calculateSumOfUnpaidLoansOfUser(Long id){
         LoanType loanType = LoanType.PRINCIPAL_DEBT;
         BigDecimal loanAmountGreaterThan = BigDecimal.ZERO;
 
         List<Loan> loanListOfUser = loanEntityService.calculateSumOfUnpaidLoansOfUser(id,loanAmountGreaterThan,loanType);
 
-       LoanSumOfLoansOfUser sumOfLoansOfUser = LoanConverter.converLoanListOfUserToLoanLoanSumOfLoansOfUserDto(loanListOfUser);
 
 
-        return sumOfLoansOfUser;
+
+        return loanListOfUser;
     }
 
-    public LoanSumOfLoansOfUser calculateSumOfOverdueUnpaidLoansOfUser(Long id){
+    public List<Loan> calculateSumOfOverdueUnpaidLoansOfUser(Long id){
         LoanType loanType = LoanType.PRINCIPAL_DEBT;
         BigDecimal loanAmountGreaterThan = BigDecimal.ZERO;
         LocalDate now = LocalDate.now();
 
         List<Loan> overdueLoanListOfUser = loanEntityService.calculateSumOfOverdueUnpaidLoansOfUser(id,loanAmountGreaterThan,loanType,now);
 
-        //LoanConverter loanConverter = new LoanConverter();
 
-        LoanSumOfLoansOfUser sumOfLoansOfUser = LoanConverter.converLoanListOfUserToLoanLoanSumOfLoansOfUserDto(overdueLoanListOfUser);
 
-        return sumOfLoansOfUser;
+
+        return overdueLoanListOfUser;
     }
 
-    public LoanTotalInterestDto calculateTotalInterestOfUser(Long id){
+    public List<Loan> calculateTotalInterestOfUser(Long id){
         LoanType loanType = LoanType.PRINCIPAL_DEBT;
         BigDecimal loanAmountGreaterThan = BigDecimal.ZERO;
         LocalDate now = LocalDate.now();
@@ -115,7 +114,7 @@ public class LoanService {
         List<Loan> overdueLoanListOfUser = loanEntityService.calculateSumOfOverdueUnpaidLoansOfUser(id,loanAmountGreaterThan,loanType,now);
         LoanTotalInterestDto totalInterest = LoanConverter.converLoanListOfUserToLoanTotalInterestDto(overdueLoanListOfUser);
 
-        return totalInterest;
+        return overdueLoanListOfUser;
     }
 
 
