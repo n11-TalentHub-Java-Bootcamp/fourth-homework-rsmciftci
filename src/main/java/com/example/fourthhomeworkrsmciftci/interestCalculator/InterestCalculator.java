@@ -9,9 +9,9 @@ public class InterestCalculator {
 
     public InterestCalculator() {
     }
-
+    // TODO:Can it be convertable to adaptor design pattern.
     public static BigDecimal calculateInterest(LocalDate dueDate, LocalDate now, BigDecimal principleLoan){
-        // TODO:MathContextleri kaldırsak hata alır mıyız? Veya kaldırmalımıyız_
+
         BigDecimal interest = BigDecimal.ZERO;
         BigDecimal interestRateBefore = BigDecimal.valueOf(1.5);
         BigDecimal interestRateAfter = BigDecimal.valueOf(2);

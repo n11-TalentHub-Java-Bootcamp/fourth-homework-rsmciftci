@@ -11,5 +11,6 @@ import java.util.List;
 public interface PaymentDao extends JpaRepository<Payment,Long> {
 
     List<Payment> findAllByPaymentDateBetween(LocalDate earlierDate,LocalDate laterDate);
+    List<Payment> findPaymentsByCustomer_Id(Long id);
 
 }

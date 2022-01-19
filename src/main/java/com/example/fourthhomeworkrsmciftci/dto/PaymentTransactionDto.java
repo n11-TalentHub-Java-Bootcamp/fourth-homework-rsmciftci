@@ -9,6 +9,6 @@ import java.math.BigDecimal;
 public class PaymentTransactionDto {
     Long principalDebtId;
     Long customerId;
-    @Digits(integer = 20,fraction = 2) //TODO:controller katmanında @Valid ile kontrol et
+    @Digits(integer = 20,fraction = 2)
     BigDecimal moneyBeingPaid;
 }
